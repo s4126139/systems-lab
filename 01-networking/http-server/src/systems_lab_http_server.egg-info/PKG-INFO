@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: systems-lab-http-server
+Version: 0.1.0
+Summary: A minimal HTTP/1.1 server built directly on TCP sockets
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Provides-Extra: test
+Requires-Dist: pytest>=8; extra == "test"
+
+## Goal
+
+## Scope
+
+## Architecture
+Client → listening socket → client socket → request bytes → response bytes
+
+## Known limitations

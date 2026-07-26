@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/http_server/__init__.py
+src/http_server/response.py
+src/http_server/server.py
+src/systems_lab_http_server.egg-info/PKG-INFO
+src/systems_lab_http_server.egg-info/SOURCES.txt
+src/systems_lab_http_server.egg-info/dependency_links.txt
+src/systems_lab_http_server.egg-info/requires.txt
+src/systems_lab_http_server.egg-info/top_level.txt
+tests/test_response.py
+tests/test_server.py

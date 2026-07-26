@@ -1,0 +1,58 @@
+#Tool used to build and install this Python package
+#setuptools is a build dependency, not a runtime dependency of the HTTP server.
+#Used Extension: Even Better TOML for highlighting syntax
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+#Basic metadata describing this project.
+[project]
+name = "systems-lab-http-server"
+
+#This is our first learning version.
+version = "0.1.0"
+
+description = "A minimal HTTP/1.1 server built directly on TCP sockets"
+
+#Use the component README as the packages's long descriptiuon
+readme = "README.md"
+
+#Refuse installation on unsupported Python versions.
+requires-python = ">=3.11"
+
+#The server uses only Python's standard library
+#socket and uuid do not need to be installed from pip
+dependencies = []
+
+#Dependencies needed for testing, but not needed to run the server.
+#The name "test" creates an optional installation extra.
+[project.optional-dependencies]
+test = [
+    "pytest>=8",
+]
+
+#Tell setuptools that importable packages live under src/.
+[tool.setuptools]
+package-dir={"" = "src"}
+
+#Search for Python packages inside src.
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# Only include http_server and any future subpackages under it.
+include = ["http_server*"]
+
+# We use a regular package with __init__.py,
+# not an implicit namespace package.
+namespaces = false
+
+
+# Configuration read by pytest.
+# ini_options works with pytest 8 and 9.
+[tool.pytest.ini_options]
+
+# Only search for tests in the tests/ directory.
+testpaths = ["tests"]
+
+# Show a short summary for skipped, failed, or xfailed tests.
+addopts = "-ra"
