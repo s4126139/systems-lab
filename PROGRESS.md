@@ -6,12 +6,12 @@ This file is the single source of truth for progress through `systems-lab`.
 
 | Field | Value |
 |---|---|
-| Status | Week 0 — repository setup |
-| Phase | Preparation |
-| Next build | Week 1 — TCP server and HTTP response |
+| Status | Week 1 — complete |
+| Phase | Phase 1 — HTTP and networking |
+| Next build | Week 2 — HTTP request parser and router |
 | Next phase gate | Gate 1 after Week 4 |
 | Blocker | None |
-| Last updated | 2026-07-26 |
+| Last updated | 2026-08-02 |
 
 ## Week 0 — Repository setup
 
@@ -19,13 +19,28 @@ This file is the single source of truth for progress through `systems-lab`.
 - [x] Normalize the 60-week roadmap.
 - [x] Define the workflow and Definition of Done.
 - [x] Create templates for weekly plans, component READMEs, and ADRs.
-- [ ] Select the video and exact scope for Week 1.
+- [x] Select the video and exact scope for Week 1.
+
+## Week 1 — TCP server and HTTP response
+
+- [x] Create an IPv4 TCP listening socket.
+- [x] Bind and listen on `127.0.0.1:4221`.
+- [x] Accept client connections and inspect raw HTTP bytes.
+- [x] Parse the request line into method, path, and version.
+- [x] Route `/`, `/health`, and unknown paths.
+- [x] Serialize valid HTTP/1.1 response bytes.
+- [x] Return `400 Bad Request` for malformed request lines.
+- [x] Add an `X-Request-Id` response header.
+- [x] Verify behavior with 10 automated tests.
+- [x] Document the client-server request workflow and Week 1 limitations.
+
+Evidence: [HTTP Server from Scratch](01-networking/http-server/README.md)
 
 ## 60-week tracker
 
 ### Phase 1 — HTTP and networking
 
-- [ ] W01 — TCP server and HTTP response
+- [x] W01 — TCP server and HTTP response
 - [ ] W02 — HTTP request parser and router
 - [ ] W03 — File server, POST, and concurrency
 - [ ] W04 — Logging, tests, and benchmark
