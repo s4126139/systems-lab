@@ -1,4 +1,6 @@
 import socket
+from http_server.response import build_response
+from uuid import uuid4
 
 HOST = "127.0.0.1" #Localhost IP address
 PORT = 4221 #Port of the running service
@@ -33,6 +35,7 @@ def serve():
             # Server: 127.0.0.1:4221
 
             with client_socket:  #each client connection has a different socket
+                request_id = uuid4().hex
                 print(f"Connected by {client_address}") #when finish this block, client socket closes
 
                 request_bytes = client_socket.recv(BUFFER_SIZE) #recv()- read the maximum of BUFFER_SIZE bytes of this client connection
@@ -45,5 +48,64 @@ def serve():
                 # - exact byte values
                 # Using print(request_bytes) may hide special characters,
                 # but repr() shows the true underlying data.
+                request_line_bytes = request_bytes.split(b"\r\n",1)[0] #1 means the split function only divides 1 time -> to get the request line
+                try:
+                    request_line = request_line_bytes.decode("ascii")
+                except UnicodeDecodeError:
+                    response_bytes = build_response(
+                        400,
+                        "Bad Request",
+                        b"Bad Request",
+                        request_id
+                    )
+
+                    client_socket.sendall(response_bytes)
+                    print("Sent 400 Bad Request: request line is not ASCII")
+
+                    continue
+
+                parts = request_line.split(" ")
+
+                if len(parts) != 3:
+                    response_bytes = build_response(
+                        400,
+                        "Bad Request",
+                        b"Bad Request",
+                        request_id
+                    )
+
+                    client_socket.sendall(response_bytes)
+                    print("Sent 400 Bad Request")
+
+                    continue
+                
+                method, path, version = parts
+    
+                print(f"Method: {method}")
+                print(f"Path: {path}")
+                print(f"Version: {version}")
+
+                print("Request line:")
+                print(repr(request_line_bytes))
+
+                if path == "/":
+                    status_code = 200
+                    reason = "OK"
+                    body = b"Hello"
+                elif path == "/health":
+                    status_code = 200
+                    reason = "OK"
+                    body = b"OK"
+                else:
+                    status_code = 404
+                    reason = "Not Found"
+                    body = b"Not Found"
+                response_bytes = build_response(status_code, reason, body, request_id)
+                client_socket.sendall(response_bytes) 
+                #sendall() requires Python continuously send until all of reponse bytes sent or network error exists
+
+                print(f"Sent {len(response_bytes)} bytes")
+
+
 if __name__=="__main__":
     serve()
