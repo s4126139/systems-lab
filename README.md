@@ -1,15 +1,16 @@
 # Systems Lab
 
-`systems-lab` is a build-to-understand monorepo. Over 60 Sundays, it grows from
-raw TCP and HTTP experiments into **Kai Cloud**: a small AI cloud platform that
-can deploy, operate, observe, and roll back a web application or RAG service on
-a local machine or a few virtual machines.
+`systems-lab` is a build-to-understand monorepo. Its long-term 60-week roadmap
+explores networking, backend and storage fundamentals, AI services, containers,
+and deployment systems.
 
-> Current status: **Week 0 — define the roadmap and working method**. There is no
-> implementation yet. This stage intentionally creates only the documentation
-> needed to keep the journey focused.
+> Current status: **Week 1 complete.** The repository includes a minimal HTTP/1.1
+> server built directly on TCP sockets, with request-line parsing, response
+> serialization, a health route, and 10 automated tests. See
+> [PROGRESS.md](PROGRESS.md) and the [HTTP server notes](01-networking/http-server/README.md).
+> Later roadmap milestones are planned work, not implemented platform features.
 
-## Destination
+## Long-term destination
 
 ```text
 Developer
@@ -39,7 +40,7 @@ CLI ──► Control Plane API
 Logs ── Metrics ── Traces ── Dashboard
 ```
 
-Kai Cloud v1 is intended to:
+The eventual Kai Cloud capstone is intended to:
 
 - create users, projects, and deployments;
 - deploy a Docker image to a suitable node;
@@ -76,10 +77,11 @@ Kubernetes.
 - Every component must state how it will contribute to Kai Cloud.
 - Optimize for depth of understanding and explanation, not technology count.
 
-## Planned repository shape
+## Repository shape
 
-Only the foundation documents exist in Week 0. The implementation directories
-below will be created gradually when their phases begin.
+The repository contains the shared roadmap and progress documents plus the
+first implemented networking milestone. Future component folders will be added
+as those milestones begin.
 
 ```text
 systems-lab/
